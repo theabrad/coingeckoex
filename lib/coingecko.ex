@@ -17,7 +17,52 @@ defmodule Coingecko do
   end
 
   @doc """
-  List all supported coins id, name and symbol
+  Get the current price of any cryptocurrencies in any other supported currencies that you need.
+  ids and vs_currencies can be a single string seperated by a comma
+  Example:
+    iex> Coingecko.get_simple_price("bitcoin", "usd,eur")
+    {:ok, {[...]}}
+  """
+  def get_simple_price(ids, vs_currencies) do
+    base = get_url() <> "simple/price"
+    query_string = URI.encode_query(ids: ids, vs_currencies: vs_currencies)
+
+    URI.parse(base)
+    |> Map.put(:query, query_string)
+    |> URI.to_string
+    |> get_data
+  end
+
+  @doc """
+  Get current price of tokens (using contract addresses) for a given platform in any other currency that you need.
+  Only Ethereum is supported now.
+  Example:
+    iex> Coingecko.get_simple_price_token("ethereum", ADDRESS, "usd")
+    {:ok, {[...]}}
+  """
+  def get_simple_token_price(id \\ "ethereum", contract_addresses, vs_currencies) do
+    base = get_url() <> "simple/token_price/#{id}"
+    query_string = URI.encode_query(contract_addresses: contract_addresses, vs_currencies: vs_currencies)
+
+    URI.parse(base)
+    |> Map.put(:query, query_string)
+    |> URI.to_string
+    |> get_data
+  end
+
+  @doc """
+  Get list of supported_vs_currencies.
+  Example:
+    iex> Coingecko.get_simple_supported_vs_currencies()
+    {:ok, {[...]}}
+  """
+  def get_simple_supported_vs_currencies() do
+    get_url() <> "simple/supported_vs_currencies"
+    |> get_data
+  end
+
+  @doc """
+  List all supported coins id, name and symbol.
   Example:
     iex> Coingecko.get_coins_list
     {:ok, {[...]}}

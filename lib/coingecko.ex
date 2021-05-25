@@ -12,4 +12,14 @@ defmodule Coingecko do
   def ping do
     Request.one("ping")
   end
+
+  @doc """
+  List all asset platforms (Blockchain networks)
+  Example:
+    iex> Coingecko.asset_platforms
+    {:ok, [{\"id\":\"(factom\",\"chain_identifier\":null,\"name"\:\Factom\"}]"}
+  """
+  def asset_platforms do
+    Request.one("asset_platforms")
+  end
 end

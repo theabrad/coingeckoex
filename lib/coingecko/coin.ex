@@ -96,4 +96,22 @@ defmodule Coingecko.Coin do
 
     Request.one("coins/#{id}/ohlc", query_string)
   end
+
+  @doc """
+  List all categorties with market data
+  Example:
+    iex> Coingecko.Coin.categories
+  """
+  def categories do
+    Request.one("coins/categories")
+  end
+
+  @doc """
+  List all categorties 
+  Example:
+    iex> Coingecko.Coin.categories_list
+  """
+  def categories_list do
+    Request.one("coins/categories/list")
+  end
 end

@@ -107,7 +107,7 @@ defmodule Coingecko.Coin do
   end
 
   @doc """
-  List all categorties 
+  List all categorties
   Example:
     iex> Coingecko.Coin.categories_list
   """

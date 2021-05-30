@@ -17,4 +17,5 @@ defmodule Coingecko.Finance do
   """
   def products do
     Request.one("finance_products")
+  end
 end
